@@ -1,0 +1,34 @@
+2.0.0 - 
+  - Add /regexp/ field selection (see manpage for usage)
+  - Trim extra trailing whitespace on fex output
+  - Fix crashing in printf
+  - Provide rpm spec ('make fex.spec' from source to generate it)
+  - Add manpage
+
+20071119 -
+  - Add nongreedy tokenizer. Same semantics of strtok_r(), but doesn't skip
+    empty tokens.
+  - Renamed tokenizer to split, since really that's what it was doing.
+  - You can invoke the nongreedy tokenizer by using '?' as the first character
+    of a {} set:
+     args: :{?4,6}
+     input: one:::four::six
+     output: four:six
+
+20071028 -
+  - Add snprintf_2.2 for platform (aka Solaris) lacking asprintf.
+  - Fix 'make package' to work in Solaris
+  - Add COPYRIGHT (BSD License)
+
+20071026 - First major release
+  - Added some tests
+  - If you want to specify a different first split token, the first character
+    can be any non-digit character which is not '-' or '{'.
+
+    These are now equivalent:
+    % echo "foo/bar/baz" | fex 0/2
+    bar
+    % echo "foo/bar/baz" | fex /2
+    bar
+
+    Previously, this would give an error due to intentional design.
